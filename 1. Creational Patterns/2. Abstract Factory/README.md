@@ -1,0 +1,1 @@
+Abstract Factory creates other Factory classes
