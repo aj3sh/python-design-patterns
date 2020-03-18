@@ -1,61 +1,62 @@
 import abc
 
-
-class Player(metaclass=abc.ABCMeta):
-	def __init__(self, file_name, file_type):
-		self.file_name = file_name
-		self.file_type = file_type
-
-	@abc.abstractmethod
-	def play(self):
+class CameraCard:
+	def save(self, image):
 		pass
 
+class SDCard(CameraCard):
+	def save(self, image):
+		print('Saving image {} on SD Card'.format(image))
 
-class VlcPlayer(Player):
-	supported_file_types = ['mp3', 'mp4', 'avi', 'mkv']
+class MicroSDCard:
+	def save_image(self, image, filename):
+		print('Saving image {} on MICRO SD Card'.format(filename))
 
-	def play(self):
-		
-		if self.file_type not in self.supported_file_types:
-			# wav file not supported by vlc is playing through adapter
-			adapter = MediaAdapter(self.file_name, self.file_type)
-			adapter.play()
-			return
+class MicroSDCardAdapter(CameraCard):
+	
+	def __init__(self, micro_sd_card):
+		self.__micro_sd_card = micro_sd_card
+	
+	def save(self, image):
+		self.__micro_sd_card.save_image(
+			image, 
+			filename=self.get_filename(image)
+		)
 
-		# playing audio file
-		print('Playing {} from VLC Player'.format(self.file_name))
+	def get_filename(self, image):
+		# returns filename from image
+		return image
 
+class Camera:
+	__card = None
 
-class MediaAdapter(Player):
-   
-	def play(self):
-		if self.file_type == 'wav':
-			wav_player = WAVPlayer()
-			wav_player.play_music(self.file_name)
-		else:
-			raise Exception('Unsupported audio format')
+	def insert_card(self, card):
+		self.__card = card
 
-class WAVPlayer:
-	"""
-	plays legacy wav audio format
-	"""
+	def click(self):
+		if self.__card == None:
+			raise Exception('No card available')
+		image = self.get_clicked_image()
+		self.__card.save(image=image)
 
-	def play_music(self, file_name):
-		print('Playing {} from WAVPlayer'.format(file_name))
+	def get_clicked_image(self):
+		from datetime import datetime
+		return str(datetime.now())+'.JPEG'
 
 
 def main():
-	# playing mp3 file
-	vlc_player = VlcPlayer('on the horizon.mp3', 'mp3')
-	vlc_player.play()
+	# this is my camera
+	my_camera = Camera()
 
-	# playing mp4 file
-	vlc_player = VlcPlayer('on the horizon.mp4', 'avc')
-	vlc_player.play()
+	print('Using Normal SD Card')
+	memory_card = SDCard()
+	my_camera.insert_card(memory_card)
+	my_camera.click()
 
-	# playing wav file
-	vlc_player = VlcPlayer('on the horizon.wav', 'wav')
-	vlc_player.play()
+	print('Using Micro SD Card')
+	memory_card = MicroSDCardAdapter(MicroSDCard())
+	my_camera.insert_card(memory_card)
+	my_camera.click()
 
 
 if __name__ == "__main__":
