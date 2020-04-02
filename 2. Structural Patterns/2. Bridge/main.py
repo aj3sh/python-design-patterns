@@ -1,101 +1,48 @@
 """
-Example of Bridge between Device and Remote
+Example of Bridge between Shape and Color
+Suppose if we need objects like red triangle, green circle, green triangle and red circle
+We can do this by making four classes RedTriangle, GreenCirlce, GreenTriangle and RedCircle
+But bridge pattern allows us to do this by simple way by making Triangle, Circle shape classes and Green, Red color classes.
+In this way, if new shape and Color is added we dont have to make every color class for shapes eg. NewColorTriangle and NewColorCircle.
+Just make color class NewColor
 """
 
 import abc
 
-class AbstractDevice(metaclass=abc.ABCMeta):
-	__enabled = False
-	__volume = 4
-	__max_volume = 10
-	__min_volume = 0
-	name = 'DEVICE'
+class Color(metaclass=abc.ABCMeta):
+	def fill(self):
+		pass
 
-	def __str__(self):
-		if not self.__enabled:
-			return '{} is OFF'.format(self.name)
-		else:
-			return '{} is ON, VOLUME: {}'.format(self.name, self.__volume)
+class Shape(metaclass=abc.ABCMeta):
 
-	def enable(self):
-		self.__enabled = True
+	def __init__(self, color):
+		self.color = color
 
-	def disable(self):
-		self.__enabled = False
-
-	def is_enabled(self):
-		return self.__enabled
-
-	def set_volume(self, volume):
-		if volume >= self.min_volume and volume <= self.max_volume:
-			self.__volume  = volume
-
-	def get_volume(self):
-		return self.__volume
-
-	# properties
-
-	@property
-	def min_volume(self):
-		return self.__min_volume
-
-	@property
-	def max_volume(self):
-		return self.__max_volume
+	def draw(self):
+		pass
 
 
-class AbstractRemote(metaclass=abc.ABCMeta):
+# Colors
+class Green(Color):
+	def fill(self):
+		return "#00ff00"
 
-	def __init__(self, device):
-		# setting up bridge connection
-		self.device = device
+class Red(Color):
+	def fill(self):
+		return "#ff0000"
 
-	def toggle_power(self):
-		self.device.disable() if self.device.is_enabled() else self.device.enable()
+# Shapes
+class Triangle(Shape):
+	def draw(self):
+		print("Drawing triangle with color "+self.color.fill())
 
-	def volume_up(self):
-		self.device.set_volume(self.device.get_volume() + 1)
-
-	def volume_down(self):
-		self.device.set_volume(self.device.get_volume() - 1)
-
-
-# Other Devices
-
-class TV(AbstractDevice):
-	name = 'TV'
-
-class Radio(AbstractDevice):
-	name = 'RADIO'
+class Circle(Shape):
+	def draw(self):
+		print("Drawing circle with color "+self.color.fill())
 
 
-# Other remote
-class NormalRemote(AbstractRemote):
-	pass
+red_triangle = Triangle(Red())
+red_triangle.draw()
 
-class AdvanceRemote(AbstractRemote):
-	__unmute_volume = 4
-
-	def toggle_mute(self):
-		if self.device.get_volume() == self.device.min_volume:
-			self.device.set_volume(self.__unmute_volume)
-		else:
-			self.__unmute_volume = self.device.get_volume()
-			self.device.set_volume(self.device.min_volume)
-
-radio = Radio()
-radio_remote = NormalRemote(device=radio)
-radio_remote.toggle_power()
-print(radio)
-radio_remote.toggle_power()
-print(radio)
-
-tv = TV()
-tv_remote = AdvanceRemote(device=tv)
-tv_remote.toggle_power()
-tv_remote.volume_up()
-print(tv)
-tv_remote.toggle_mute()
-print(tv)
-tv_remote.toggle_mute()
-print(tv)
+green_circle = Circle(Green())
+green_circle.draw()

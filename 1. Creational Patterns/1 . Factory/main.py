@@ -1,6 +1,6 @@
 from abc import ABC
 
-class Color(ABC):
+class Shape(ABC):
 	def draw(self):
 		pass
 
