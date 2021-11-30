@@ -43,7 +43,6 @@ class AbstractDevice(metaclass=abc.ABCMeta):
 	def max_volume(self):
 		return self.__max_volume
 
-
 class AbstractRemote(metaclass=abc.ABCMeta):
 
 	def __init__(self, device):
