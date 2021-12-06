@@ -15,16 +15,20 @@ class JumpBehavior(metaclass=abc.ABCMeta):
 # Implementation
 
 class LightningKick(KickBehavior):
-	pass
+	def kick(self):
+		print('Lightning kick.')
 
-class LightningKick(KickBehavior):
-	pass
+class TornadoKick(KickBehavior):
+	def kick(self):
+		print('Tornado kick.')
 
 class ShortJump(JumpBehavior):
-	pass
+	def jump(self):
+		print('Short kick.')
 
 class LongJump(JumpBehavior):
-	pass
+	def jump(self):
+		print('Long kick.')
 
 
 class Fighter(metaclass=abc.ABCMeta):
@@ -32,7 +36,7 @@ class Fighter(metaclass=abc.ABCMeta):
 	_jump_behavior:'JumpBehavior'
 
 	def punch(self):
-		print('Normal Punch')
+		print('Normal Punch.')
 		return None
 
 	def kick(self):
@@ -46,3 +50,32 @@ class Fighter(metaclass=abc.ABCMeta):
 
 	def set_jump_behavior(self, jump_behavior):
 		self._jump_behavior = jump_behavior
+
+
+def main():
+	human_fighter = Fighter()
+	human_fighter.set_jump_behavior(ShortJump())
+	human_fighter.set_kick_behavior(TornadoKick())
+	# actions
+	print("Human Fighter")
+	human_fighter.punch()
+	human_fighter.jump()
+	human_fighter.kick()
+
+	
+	alien_fighter = Fighter()
+	alien_fighter.set_jump_behavior(LongJump())
+	alien_fighter.set_kick_behavior(LightningKick())
+	# actions
+	print("\nAlien Fighter")
+	alien_fighter.punch()
+	alien_fighter.jump()
+	alien_fighter.kick()
+
+	# changing behavior
+	alien_fighter.set_kick_behavior(TornadoKick())
+	alien_fighter.kick()
+
+
+if __name__ == "__main__":
+	main()
