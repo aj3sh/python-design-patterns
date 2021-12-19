@@ -1,10 +1,13 @@
 """
+Bridge is a structural design pattern that lets you split a large class or a set of closely related classes 
+into two separate hierarchies—abstraction and implementation—which can be developed independently of each other.
+
 Example of Bridge between Shape and Color
 Suppose if we need objects like red triangle, green circle, green triangle and red circle
 We can do this by making four classes RedTriangle, GreenCircle, GreenTriangle and RedCircle
 But bridge pattern allows us to do this by simple way by making Triangle, Circle shape classes and Green, Red color classes.
-In this way, if new shape and Color is added we don't have to make every color class for shapes eg. NewColorTriangle and NewColorCircle.
-Just make color class NewColor
+In this way, if new shape and Color is added we don't have to make every color class for shapes 
+eg. NewColorTriangle and NewColorCircle. Just make color class NewColor
 """
 
 import abc

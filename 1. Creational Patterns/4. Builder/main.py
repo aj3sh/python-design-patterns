@@ -1,3 +1,7 @@
+'''
+Builder pattern builds a complex object using simple objects and using a step by step approach.
+'''
+
 class Person:
 
 	def __init__(self, first_name, last_name, age, fathers_name, mothers_name, height, weight):

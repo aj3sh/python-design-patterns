@@ -1,3 +1,7 @@
+'''
+Factory generates objects from different classes
+'''
+
 from abc import ABC
 
 class Shape(ABC):

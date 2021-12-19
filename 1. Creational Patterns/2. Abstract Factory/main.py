@@ -1,3 +1,7 @@
+'''
+Abstract Factory creates other Factory class instance.
+'''
+
 from abc import ABC
 
 # shapes

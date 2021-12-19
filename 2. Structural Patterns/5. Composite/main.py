@@ -1,3 +1,11 @@
+'''
+Composite is a structural design pattern that lets you compose objects into tree structures 
+and then work with these structures as if they were individual objects.
+
+eg. If some event is happened to the node, it will handle that event and pass it to its children
+and the children node does the same.
+'''
+
 class Item:
 	def __init__(self, *, weight):
 		self._weight = weight

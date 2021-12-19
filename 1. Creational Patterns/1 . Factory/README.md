@@ -1,1 +1,0 @@
-Factory generates objects from different classes

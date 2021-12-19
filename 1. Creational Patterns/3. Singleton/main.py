@@ -1,3 +1,7 @@
+'''
+Contains only single instance. returns same object every time
+'''
+
 class SingleObject:
 	name = None
 
