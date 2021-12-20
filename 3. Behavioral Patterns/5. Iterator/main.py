@@ -18,28 +18,38 @@ class Song:
 
 class SongList(Iterator):
     def __init__(self, songs=[]):
+        self.__current_index = 0
         self.__songs = songs
         super().__init__()
 
+    @property
+    def length(self):
+        if not hasattr(self, '__song_length'):
+            self.__song_length = len(self.__songs)
+        return self.__song_length
+
     def add_song(self, song: Song):
-        pass
+        self.__songs.append(song)
 
     def next(self):
-        pass
+        self.__current_index += 1
+        return self.__songs[self.__current_index - 1]
 
     def has_next(self):
-        pass
+        return self.__current_index < self.length
 
 class Album:
     def __init__(self, songs):
-        self.__songs = []
+        self.__songs = songs
         super().__init__()
 
     def get_songs(self) -> SongList:
-        pass
+        return SongList(self.__songs)
 
 def print_songs(songs: Iterator):
-    pass
+    while songs.has_next():
+        song = songs.next()
+        print(song)
 
 def main():
     songs = SongList(songs=[
@@ -53,7 +63,7 @@ def main():
         'Album Song 2',
         'Album Song 3',
     ])
-
+    
     print_songs(songs)
     print_songs(album.get_songs())
     
