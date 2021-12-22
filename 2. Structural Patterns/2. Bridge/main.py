@@ -44,8 +44,13 @@ class Circle(Shape):
 		print("Drawing circle with color "+self.color.fill())
 
 
-red_triangle = Triangle(Red())
-red_triangle.draw()
+def main():
+	red_triangle = Triangle(Red())
+	red_triangle.draw()
 
-green_circle = Circle(Green())
-green_circle.draw()
+	green_circle = Circle(Green())
+	green_circle.draw()
+
+
+if __name__ == '__main__':
+	main()

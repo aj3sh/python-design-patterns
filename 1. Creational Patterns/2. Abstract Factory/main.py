@@ -66,21 +66,26 @@ class FactoryProducer:
 		return ShapeFactory()
 
 
-# normal shape factory
-shape_factory = FactoryProducer.get_factory(rounded=False)
+def main():
+	# normal shape factory
+	shape_factory = FactoryProducer.get_factory(rounded=False)
 
-rectangle = shape_factory.produce(object_type='RECTANGLE')
-rectangle.draw()
+	rectangle = shape_factory.produce(object_type='RECTANGLE')
+	rectangle.draw()
 
-square = shape_factory.produce(object_type='SQUARE')
-square.draw()
+	square = shape_factory.produce(object_type='SQUARE')
+	square.draw()
 
 
-# rounded shape factory
-rounded_shape_factory = FactoryProducer.get_factory(rounded=True)
+	# rounded shape factory
+	rounded_shape_factory = FactoryProducer.get_factory(rounded=True)
 
-rounded_rectangle = rounded_shape_factory.produce(object_type='RECTANGLE')
-rounded_rectangle.draw()
+	rounded_rectangle = rounded_shape_factory.produce(object_type='RECTANGLE')
+	rounded_rectangle.draw()
 
-rounded_square = rounded_shape_factory.produce(object_type='SQUARE')
-rounded_square.draw()
+	rounded_square = rounded_shape_factory.produce(object_type='SQUARE')
+	rounded_square.draw()
+
+
+if __name__ == '__main__':
+	main()

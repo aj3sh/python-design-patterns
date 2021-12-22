@@ -36,10 +36,15 @@ class ShapeFactory:
 		return None
 
 
-shape_factory = ShapeFactory()
+def main():
+	shape_factory = ShapeFactory()
 
-circle = shape_factory.produce(object_type='CIRCLE')
-circle.draw()
+	circle = shape_factory.produce(object_type='CIRCLE')
+	circle.draw()
 
-square = shape_factory.produce(object_type='SQUARE')
-square.draw()
+	square = shape_factory.produce(object_type='SQUARE')
+	square.draw()
+
+
+if __name__ == '__main__':
+	main()

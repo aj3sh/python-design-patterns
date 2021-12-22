@@ -51,6 +51,12 @@ class Person:
 							mothers_name=self.mothers_name, height=self.height, weight=self.weight)
 
 
-person = Person.Builder().set_first_name('Ajesh').set_last_name('Thapa').set_age(21).set_fathers_name('test').set_mothers_name('Test'
-			).set_height(30).set_weight(30).build()
-print(person)
+
+def main():
+	person = Person.Builder().set_first_name('Ajesh').set_last_name('Thapa').set_age(21).set_fathers_name('test').set_mothers_name('Test'
+				).set_height(30).set_weight(30).build()
+	print(person)
+
+
+if __name__ == '__main__':
+	main()

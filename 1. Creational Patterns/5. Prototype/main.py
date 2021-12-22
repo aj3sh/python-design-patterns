@@ -63,21 +63,26 @@ class PlayerPrototype:
 
 
 
-# loading all prototypes
-PlayerPrototype.load_prototype()
+def main():
+	# loading all prototypes
+	PlayerPrototype.load_prototype()
 
-# loading stricker
-striker1 = PlayerPrototype.get_player('STRICKER')
-striker1.set_name('Max')
-striker1.print_status()
+	# loading stricker
+	striker1 = PlayerPrototype.get_player('STRICKER')
+	striker1.set_name('Max')
+	striker1.print_status()
 
-# loading another stricker
-striker2 = PlayerPrototype.get_player('STRICKER')
-striker2.set_name('John')
-striker2.print_status()
+	# loading another stricker
+	striker2 = PlayerPrototype.get_player('STRICKER')
+	striker2.set_name('John')
+	striker2.print_status()
 
-# loading midfielder
-midfielder = PlayerPrototype.get_player('MIDFIELDER')
-midfielder.set_name('Jason')
-midfielder.set_skill(40, 100, 90)
-midfielder.print_status()
+	# loading midfielder
+	midfielder = PlayerPrototype.get_player('MIDFIELDER')
+	midfielder.set_name('Jason')
+	midfielder.set_skill(40, 100, 90)
+	midfielder.print_status()
+
+
+if __name__ == '__main__':
+	main()

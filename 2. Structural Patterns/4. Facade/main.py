@@ -98,7 +98,12 @@ class Notifier:
 		database_notification.save(user=user, notification=notification_message)
 
 
-# using facade
-user = User()
-notifier = Notifier()
-notifier.send_notification(user, 'You have a new message from your Friend')
+def main():
+	# using facade
+	user = User()
+	notifier = Notifier()
+	notifier.send_notification(user, 'You have a new message from your Friend')
+
+
+if __name__ == "__main__":
+	main()
